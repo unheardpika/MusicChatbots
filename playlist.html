@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Space+Grotesk%3Awght%40400%3B500%3B700"
+    />
+
+    <title>Playlists</title>
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  </head>
+  <body>
+    <div class="relative flex size-full min-h-screen flex-col bg-[#111b22] dark group/design-root overflow-x-hidden" style='font-family: "Space Grotesk", "Noto Sans", sans-serif;'>
+      <div class="layout-container flex h-full grow flex-col">
+        <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#243847] px-10 py-3">
+          <h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em]">Playlists</h2>
+          <button
+            class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#3dc0f4] text-[#101d23] text-sm font-bold leading-normal tracking-[0.015em]"
+            id="back-button"
+          >
+            <span class="truncate">Back to Chat</span>
+          </button>
+        </header>
+
+        <div class="px-40 flex flex-1 justify-center py-5">
+          <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+
+            <!-- ✅ Chatbot Song History Section -->
+            <h3 class="text-white text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Chatbot Song History</h3>
+            <div id="song-history" class="flex flex-col space-y-4 px-4 pb-6"></div>
+
+            <!-- ✅ Your Existing Static Playlists (Unchanged) -->
+            <h3 class="text-white text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Other Playlists</h3>
+            <div class="flex items-center gap-4 bg-[#111b22] px-4 min-h-14">
+              <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-lg size-10" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBKSIYMVgGF2jt8RyP1M7dQlvnZ9bSOMGqbq7ohQHq8ZQhEqDgLIEBimwz0ZuiZKAI-tLqhsdddwqeQT7fYy_vgZzcTiRxoeSV5b3asZvkPjDD8ZMY-iFmmA4N7Kn3X5-wBCv7TRXvYLwXVJSvg_lRFeOsswO1aKR3ZxLsBYGSCVFL7mCjSalibneszmC1CyTCOCSEyyN2rVLVr4UZVjG3lvaXKI8T79AfRjJ10e9mgVbL4YDiQP0xAC53wCdBQObKgDfw8B1XsqW_i");'></div>
+              <p class="text-white text-base font-normal leading-normal flex-1 truncate">Chill Vibes</p>
+            </div>
+            <!-- You can add more static playlists below here as you had before -->
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ✅ Scripts -->
+    <script>
+      // Redirect back to chat.html
+      document.getElementById('back-button').addEventListener('click', () => {
+        window.location.href = 'chat.html';
+      });
+
+      // Load chatbot song history from backend
+      async function loadHistory() {
+        try {
+          const res = await fetch('/history');
+          const history = await res.json();
+          const historyContainer = document.getElementById('song-history');
+
+          if (history.length === 0) {
+            historyContainer.innerHTML = '<p class="text-[#93b2c8] text-center">No songs played yet.</p>';
+            return;
+          }
+
+          history.forEach((song, idx) => {
+            const songEl = document.createElement('div');
+            songEl.className = 'flex items-center gap-4 bg-[#111b22] px-4 py-3 rounded-lg border border-[#3dc0f4]';
+
+            songEl.innerHTML = `
+              <div class="bg-center bg-no-repeat bg-cover rounded-lg size-14" style="background-image: url('${song.album_image || ''}');"></div>
+              <div class="flex flex-col">
+                <p class="text-white text-base font-medium leading-normal line-clamp-1">${idx + 1}. ${song.song}</p>
+                <p class="text-[#93b2c8] text-sm font-normal leading-normal line-clamp-2">${song.artist}</p>
+                <a href="${song.url}" target="_blank" class="mt-1 inline-block text-[#3dc0f4] text-sm font-semibold">Listen on Spotify</a>
+              </div>
+            `;
+            historyContainer.appendChild(songEl);
+          });
+        } catch (error) {
+          console.error('Error loading history:', error);
+        }
+      }
+
+      loadHistory();
+    </script>
+  </body>
+</html>

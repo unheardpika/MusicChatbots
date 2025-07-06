@@ -1,0 +1,110 @@
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Space+Grotesk%3Awght%40400%3B500%3B700"
+    />
+
+    <title>Chat</title>
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  </head>
+  <body>
+    <div class="relative flex size-full min-h-screen flex-col bg-[#101d23] dark group/design-root overflow-x-hidden" style='font-family: "Space Grotesk", "Noto Sans", sans-serif;'>
+      <div class="layout-container flex h-full grow flex-col">
+        <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#223e49] px-10 py-3">
+          <h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em]">Spotube</h2>
+          <div class="flex gap-2">
+            <button
+              class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#3dc0f4] text-[#101d23] text-sm font-bold leading-normal tracking-[0.015em]"
+              id="signup-button"
+            >
+              <span class="truncate">Sign Up</span>
+            </button>
+            <button
+              class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#223e49] text-white text-sm font-bold leading-normal tracking-[0.015em]"
+              id="settings-button"
+            >
+              <span class="truncate">Settings</span>
+            </button>
+            <button
+              class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#1990e5] text-white text-sm font-bold leading-normal tracking-[0.015em]"
+              id="playlist-button"
+            >
+              <span class="truncate">Playlist</span>
+            </button>
+          </div>
+        </header>
+        <div class="px-40 flex flex-1 justify-center py-5">
+          <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+            <h2 class="text-white tracking-light text-[28px] font-bold leading-tight px-4 text-center pb-3 pt-5" id="welcome-message">Welcome back!</h2>
+            <p class="text-white text-base font-normal leading-normal pb-3 pt-1 px-4 text-center">How can I assist you with your music today?</p>
+            <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+              <label class="flex flex-col min-w-40 flex-1">
+                <input
+                  placeholder="Type your message here..."
+                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-white focus:outline-0 focus:ring-0 border-none bg-[#223e49] focus:border-none h-14 placeholder:text-[#90bacb] p-4 text-base font-normal leading-normal"
+                  value=""
+                />
+              </label>
+            </div>
+            <div class="flex px-4 py-3 justify-center">
+              <button
+                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#3dc0f4] text-[#101d23] text-sm font-bold leading-normal tracking-[0.015em]"
+                id="send-button"
+              >
+                <span class="truncate">Send</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      // Functionality for the "Send" button
+      document.getElementById('send-button').addEventListener('click', async () => {
+        const inputField = document.querySelector('.form-input');
+        const message = inputField.value.trim();
+        if (message) {
+          try {
+            const response = await fetch('/chatbot', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ message })
+            });
+            const data = await response.json();
+            alert(data.reply); // Replace with better UI later
+            inputField.value = '';
+          } catch (error) {
+            alert('Error connecting to server.');
+          }
+        } else {
+          alert('Please type a message before sending.');
+        }
+      });
+
+      // Redirect to signup.html when "Sign Up" is clicked
+      document.getElementById('signup-button').addEventListener('click', () => {
+        window.location.href = '/static/signup.html';
+      });
+
+      // Redirect to settings.html when "Settings" is clicked
+      document.getElementById('settings-button').addEventListener('click', () => {
+        window.location.href = '/static/settings.html';
+      });
+
+      // Redirect to playlist.html when "Playlist" is clicked
+      document.getElementById('playlist-button').addEventListener('click', () => {
+        window.location.href = '/static/playlist.html';
+      });
+
+      // Update welcome message with username
+      const username = localStorage.getItem('username') || 'User'; // Retrieve username from localStorage
+      document.getElementById('welcome-message').textContent = `Welcome back, ${username}!`;
+    </script>
+  </body>
+</html>

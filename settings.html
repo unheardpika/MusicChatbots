@@ -1,0 +1,86 @@
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Space+Grotesk%3Awght%40400%3B500%3B700"
+    />
+
+    <title>Settings</title>
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  </head>
+  <body>
+    <div class="relative flex size-full min-h-screen flex-col bg-[#101d23] dark group/design-root overflow-x-hidden" style='font-family: "Space Grotesk", "Noto Sans", sans-serif;'>
+      <div class="layout-container flex h-full grow flex-col">
+        <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#223e49] px-10 py-3">
+          <h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em]">Settings</h2>
+          <button
+            class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#3dc0f4] text-[#101d23] text-sm font-bold leading-normal tracking-[0.015em]"
+            id="back-button"
+          >
+            <span class="truncate">Back to Chat</span>
+          </button>
+        </header>
+        <div class="px-40 flex flex-1 justify-center py-5">
+          <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+            <h3 class="text-white text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Music Streaming</h3>
+            <div class="flex items-center gap-4 bg-[#101d23] px-4 min-h-[72px] py-2 justify-between">
+              <div class="flex flex-col justify-center">
+                <p class="text-white text-base font-medium leading-normal line-clamp-1">Crossfade</p>
+                <p class="text-[#90bacb] text-sm font-normal leading-normal line-clamp-2">Adjust the transition between songs</p>
+              </div>
+              <div class="shrink-0"><p class="text-white text-base font-normal leading-normal">10s</p></div>
+            </div>
+            <h3 class="text-white text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Preferences</h3>
+            <div class="flex items-center gap-4 bg-[#101d23] px-4 min-h-[72px] py-2 justify-between">
+              <div class="flex flex-col justify-center">
+                <p class="text-white text-base font-medium leading-normal line-clamp-1">Explicit Content Filter</p>
+                <p class="text-[#90bacb] text-sm font-normal leading-normal line-clamp-2">Enable or disable explicit content filtering</p>
+              </div>
+              <div class="shrink-0">
+                <label
+                  class="relative flex h-[31px] w-[51px] cursor-pointer items-center rounded-full border-none bg-[#223e49] p-0.5 has-[:checked]:justify-end has-[:checked]:bg-[#3dc0f4]"
+                >
+                  <div class="h-full w-[27px] rounded-full bg-white" style="box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 8px, rgba(0, 0, 0, 0.06) 0px 3px 1px;"></div>
+                  <input type="checkbox" class="invisible absolute" />
+                </label>
+              </div>
+            </div>
+            <div class="flex items-center gap-4 bg-[#101d23] px-4 min-h-[72px] py-2 justify-between">
+              <div class="flex flex-col justify-center">
+                <p class="text-white text-base font-medium leading-normal line-clamp-1">Language</p>
+                <p class="text-[#90bacb] text-sm font-normal leading-normal line-clamp-2">Choose your preferred language for the chatbot</p>
+              </div>
+              <div class="shrink-0"><p class="text-white text-base font-normal leading-normal">English</p></div>
+            </div>
+            <div class="flex items-center gap-4 bg-[#101d23] px-4 min-h-[72px] py-2 justify-between">
+              <div class="flex flex-col justify-center">
+                <p class="text-white text-base font-medium leading-normal line-clamp-1">Account</p>
+                <p class="text-[#90bacb] text-sm font-normal leading-normal line-clamp-2">Manage your account details and preferences</p>
+              </div>
+              <div class="shrink-0">
+                <div class="text-white flex size-7 items-center justify-center" data-icon="ArrowRight" data-size="24px" data-weight="regular">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                    <path
+                      d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      // Redirect back to chat.html when "Back to Chat" is clicked
+      document.getElementById('back-button').addEventListener('click', () => {
+        window.location.href = 'chat.html';
+      });
+    </script>
+  </body>
+</html>
