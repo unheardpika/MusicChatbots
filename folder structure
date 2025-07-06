@@ -1,0 +1,13 @@
+spotify-chatbot/
+│
+├── app.py               # Flask backend
+├── requirements.txt     # Your dependencies
+├── .gitignore           # Files to ignore (VERY important)
+├── README.md            # Docs (optional for now)
+├── /static/             # Your HTML, CSS, JS files (frontend)
+│   ├── chat.html
+│   ├── playlist.html
+│   ├── signup.html
+│   └── settings.html
+├── .env                 # Your Spotify secrets (DO NOT upload)
+├── history.json         # Playback history (auto-created; skip uploading)
