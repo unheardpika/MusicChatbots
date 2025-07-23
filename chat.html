@@ -7,10 +7,8 @@
       onload="this.rel='stylesheet'"
       href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Space+Grotesk%3Awght%40400%3B500%3B700"
     />
-
     <title>Chat</title>
     <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
-
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   </head>
   <body>
@@ -65,7 +63,6 @@
       </div>
     </div>
     <script>
-      // Functionality for the "Send" button
       document.getElementById('send-button').addEventListener('click', async () => {
         const inputField = document.querySelector('.form-input');
         const message = inputField.value.trim();
@@ -77,7 +74,7 @@
               body: JSON.stringify({ message })
             });
             const data = await response.json();
-            alert(data.reply); // Replace with better UI later
+            alert(data.reply); 
             inputField.value = '';
           } catch (error) {
             alert('Error connecting to server.');
@@ -86,24 +83,16 @@
           alert('Please type a message before sending.');
         }
       });
-
-      // Redirect to signup.html when "Sign Up" is clicked
       document.getElementById('signup-button').addEventListener('click', () => {
         window.location.href = '/static/signup.html';
       });
-
-      // Redirect to settings.html when "Settings" is clicked
       document.getElementById('settings-button').addEventListener('click', () => {
         window.location.href = '/static/settings.html';
       });
-
-      // Redirect to playlist.html when "Playlist" is clicked
       document.getElementById('playlist-button').addEventListener('click', () => {
         window.location.href = '/static/playlist.html';
       });
-
-      // Update welcome message with username
-      const username = localStorage.getItem('username') || 'User'; // Retrieve username from localStorage
+      const username = localStorage.getItem('username') || 'User'; 
       document.getElementById('welcome-message').textContent = `Welcome back, ${username}!`;
     </script>
   </body>
