@@ -7,10 +7,8 @@
       onload="this.rel='stylesheet'"
       href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Space+Grotesk%3Awght%40400%3B500%3B700"
     />
-
     <title>Sign Up</title>
     <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
-
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   </head>
   <body>
@@ -46,16 +44,15 @@
       </div>
     </div>
     <script>
-      // Store username in localStorage and redirect to signin.html
       document.getElementById('signup-submit-button').addEventListener('click', () => {
         const name = document.getElementById('name-input').value.trim();
         if (!name) {
           alert('Please enter your name.');
           return;
         }
-        localStorage.setItem('username', name); // Store the username
+        localStorage.setItem('username', name); 
         alert(`Welcome, ${name}! Your account has been created.`);
-        window.location.href = 'signin.html'; // Redirect to signin.html
+        window.location.href = 'signin.html'; 
       });
     </script>
   </body>
